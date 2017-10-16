@@ -5,6 +5,8 @@ Showing [GREE's Unity WebView] in specific UI area.
 
 \*It's look-like WebView is showing on UI but NOT!!
 
+Tested on Unity 5.5.1f1 & Unity 2017.1.0f3
+
 ## Requirement
 
 - [GREE's Unity WebView]

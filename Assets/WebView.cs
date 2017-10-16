@@ -193,6 +193,33 @@ public static class WebView
         System.IO.File.WriteAllBytes(dst, result);
         yield break;
     }
+
+    /// <summary>
+    /// Write data in "StreamingAssets" folder to Application.persistentDataPath.
+    /// *By default, this function MUST be called by StartCoroutine().
+    /// </summary>
+    public static IEnumerator WritePersistentDataFromStreamingAsset(string[] localUrls)
+    {
+        foreach (string url in localUrls)
+        {
+            string src = System.IO.Path.Combine(Application.streamingAssetsPath, url);
+            string dst = System.IO.Path.Combine(Application.persistentDataPath, url);
+            byte[] result = null;
+            // For Android
+            if (src.Contains("://"))
+            {
+                var www = new WWW(src);
+                yield return www;
+                result = www.bytes;
+            }
+            else
+            {
+                result = System.IO.File.ReadAllBytes(src);
+            }
+            System.IO.File.WriteAllBytes(dst, result);
+        }
+        yield break;
+    }
     #endregion
 
     //------------------------------ Private Methods ------------------------------//
